@@ -1,0 +1,5 @@
+numpy==1.23.2
+pandas==1.4.3
+plotly==5.10.0
+pyodbc==4.0.34
+streamlit==1.12.0
