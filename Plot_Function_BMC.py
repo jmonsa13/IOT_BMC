@@ -25,7 +25,7 @@ def plot_on_off(fig, df, column, legend, rgb, visibility="legendonly", axis_y="y
     return fig
 
 
-@st.cache(persist=False, allow_output_mutation=True, suppress_st_warning=True, show_spinner=True, ttl=24 * 3600)
+@st.experimental_memo(suppress_st_warning=True, show_spinner=True)
 def plot_html_BMC4(df, title):
     """
     Función para dibujar los datos de BMC4

@@ -100,7 +100,8 @@ if graficar is True:
         # Button to refresh the data
         if st.button("Refrescar gráfica", key="refrescar"):
             flag_download = True
-            st.legacy_caching.clear_cache()
+            get_data_day.clear()
+            get_data_range.clear()
             st.experimental_rerun()
 
         # Dibujando la grafica
@@ -140,8 +141,6 @@ if graficar is True:
     st.subheader("4) Analizar los datos")
     st.info(" Sección en Construcción")
 # ----------------------------------------------------------------------------------------------------------------------
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 st.sidebar.header("Acerca de la App")
 st.sidebar.markdown("**Creado por:**")

@@ -8,7 +8,9 @@ import os
 
 import numpy as np
 import pandas as pd
-import pyodbc
+from sqlalchemy.engine import URL
+from sqlalchemy import create_engine
+
 import streamlit as st
 
 
@@ -96,7 +98,7 @@ def add_day(day, add=1):
     return str(ini_date), str(fin_date)
 
 
-@st.cache(persist=False, allow_output_mutation=True, suppress_st_warning=True, show_spinner=True, ttl=24 * 3600)
+@st.experimental_memo(suppress_st_warning=True, show_spinner=True)
 def get_data_day(sel_dia="2022-01-01", sql_table="BMC4", flag_download=False):
     """
     Programa que permite conectar con una base de dato del servidor y devuelve la base de dato como un pandas dataframe
@@ -130,7 +132,7 @@ def get_data_day(sel_dia="2022-01-01", sql_table="BMC4", flag_download=False):
     return df, salud_list, salud_datos, title
 
 
-@st.cache(persist=False, allow_output_mutation=True, suppress_st_warning=True, show_spinner=True, ttl=24 * 3600)
+@st.experimental_memo(suppress_st_warning=True, show_spinner=True)
 def get_data_range(sel_dia_ini="2022-01-01", sel_dia_fin="2022-01-02", sql_table="BMC4", flag_download=False):
     """
     Programa que permite conectar con una base de dato del servidor y devuelve la base de dato como un pandas dataframe
@@ -243,8 +245,10 @@ def sql_connect(tipo="day", day="2022-08-17", server='EASAB101', database='BMC4'
         pd_sql = pandas dataframe traído de la base de dato SQL
     """
     # Connecting to the sql database
-    conn = pyodbc.connect(
-        'driver={SQL Server};server=%s;database=%s;uid=%s;pwd=%s' % (server, database, username, password))
+    connection_str = "DRIVER={SQL Server};SERVER=%s;DATABASE=%s;UID=%s;PWD=%s" % (server, database, username, password)
+    connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_str})
+
+    conn = create_engine(connection_url)
     # ------------------------------------------------------------------------------------------------------------------
     # Tipos de conexiones establecidas para traer distintas cantidades de datos
     # ------------------------------------------------------------------------------------------------------------------
