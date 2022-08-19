@@ -55,13 +55,13 @@ def plot_html_BMC4(df, title):
     fig.add_trace(go.Scatter(x=df.index, y=df["Temp_Agua [°C]"],
                              line=dict(color='#1616a7', width=1),
                              mode='lines',  # 'lines+markers'
-                             name='Temp Agua [°C]',
+                             name='Temp Agua Chaqueta [°C]',
                              yaxis="y",
                              ),
                   row=1, col=1)
 
     # Nivel_Pasta
-    fig = plot_on_off(fig, df, "Nivel_Pasta [bool]", "Niv Pasta", 'rgba(55,126,184,0.7)')
+    fig = plot_on_off(fig, df, "Nivel_Pasta [bool]", "Llenado Pasta", 'rgba(55,126,184,0.7)')
 
     # ------------------------------------------------------------------------------------------------------------------
     # ------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ def plot_html_BMC4(df, title):
     # Presion_Spagless
     fig.add_trace(go.Scatter(x=df.index, y=df["Presion_Spagless [Psi]"],
                              line=dict(color='#3366cc', width=1,),  # dash='dash'),
-                             mode='lines', name='Pres_Spagless',
+                             mode='lines', name='Pres_Rec_Moldura',
                              yaxis="y5",
                              ),
                   secondary_y=False, row=3, col=1)
@@ -120,7 +120,7 @@ def plot_html_BMC4(df, title):
     fig['layout']['yaxis4']['range'] = [0, 1]
     fig['layout']['yaxis4']['fixedrange'] = True
 
-    fig['layout']['yaxis5']['title'] = 'Presion Spagless [Psi]'
+    fig['layout']['yaxis5']['title'] = 'Presion Recuperación Moldura [Psi]'
     fig['layout']['yaxis5']['range'] = [20, 100]
     fig['layout']['yaxis5']['fixedrange'] = False
 
