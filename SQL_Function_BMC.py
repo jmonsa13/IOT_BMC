@@ -113,7 +113,7 @@ def get_data_day(sel_dia="2022-01-01", sql_table="BMC4", flag_download=False):
         title = Título para la gráfica
     """
     # Definición del numero total de datos por días
-    datos_días = 24 * 60 * 12  # 24 horas en un día x 60 minutos en cada hora x 12 veces tomo el dato cada minuto (5seg)
+    datos_días = 24 * 60 * 60  # 24 horas en un día x 60 minutos en cada hora x 60 veces tomo el dato cada minuto (1seg)
 
     # Conexión a la base de datos SQL
     df = find_load(tipo="day_planta", day=str(sel_dia), ini=None, database=sql_table,
@@ -149,7 +149,7 @@ def get_data_range(sel_dia_ini="2022-01-01", sel_dia_fin="2022-01-02", sql_table
         title = Título para la gráfica
         """
     # Definición del numero total de datos por días
-    datos_días = 24 * 60 * 12  # 24 horas en un día x 60 minutos en cada hora x 12 veces tomo el dato cada minuto (5seg)
+    datos_días = 24 * 60 * 60  # 24 horas en un día x 60 minutos en cada hora x 60 veces tomo el dato cada minuto (5seg)
 
     # Conexión a la base de datos SQL
     df = find_load(tipo="rango_planta", ini=str(sel_dia_ini), day=str(sel_dia_fin), database=sql_table,
